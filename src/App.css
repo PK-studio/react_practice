@@ -16,12 +16,23 @@
 
 .App-title {
   font-size: 1.5em;
-}
+}S
 
 .App-intro {
   font-size: large;
 }
 
+.component-description{
+  background-color: #eaeaea;
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.DateComponent{
+  width: 100%;
+  height: auto;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

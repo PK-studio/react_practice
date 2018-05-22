@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-class Projects extends Component {
+class DateComponent extends Component {
 
   constructor(props) {
     super(props)
     this.state = { 
-      time: "show time",
-      data: "render date"
+      time: new Date().toLocaleTimeString()
     };
   };
 
@@ -26,13 +25,12 @@ class Projects extends Component {
 
   render() {
     return (
-      <div className="projects">
-        <p>My Projects Component</p>
-        {this.props.passArguments}
+      <div className="DateComponent">
+        <h4 className="component-description">{this.props.description}</h4>
         <p>Current time {this.state.time}</p>
       </div>
     );
   }
 }
 
-export default Projects;
+export default DateComponent;
