@@ -6,9 +6,10 @@ class ListEditorCompontent extends Component {
     super(props)
     this.state = {
         items: [],
-        text: "test"
+        text: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.addHandler = this.addHandler.bind(this);
   };
 
   render() {
@@ -21,22 +22,45 @@ class ListEditorCompontent extends Component {
             <label>
                 Add or remove item
             </label>
-            <input
-              onChange={this.handleChange}
+            <input 
+              onChange = {this.handleChange}
+              value = {this.state.text}
             />
-          <button>add</button>
-          <button>remove</button>
+            <button onClick={this.addHandler} > add </button>
           </form>
-          <p>{this.state.text}</p>
+          {/* <ItemsList/> */}
         </div>
       </div>
     );
   }
 
   handleChange(event){
-      this.setState({text: event.target.value})
-      console.log(event.target.value)
+    this.setState({text: event.target.value})
+  }
+
+  addHandler(event){
+    event.preventDefault();
+    if (!this.state.text.length) {
+      return
+    }
+    const myItem = {
+      text: this.state.text
+    } 
+    this.setState(prevState => ({
+      items: prevState.items.concat(myItem),
+      text: ""
+    }))
+
+    // this.setState is asynchronous = value doesn't match
+    // this.setState({ 'updated': 'state'}, () => {
+    //   console.log(this.state.updated);
+    // });
   }
 }
+// class ItemsList extends Component {
+//   render(){
+
+//   }
+// }
 
 export default ListEditorCompontent;
