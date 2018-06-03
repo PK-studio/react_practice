@@ -9,6 +9,7 @@ class ListEditorCompontent extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.addHandler = this.addHandler.bind(this);
+    this.removeHandler = this.removeHandler.bind(this);
     this.ListEditorUpdater = this.ListEditorUpdater.bind(this);
   };
   render() {
@@ -26,6 +27,7 @@ class ListEditorCompontent extends Component {
               value = {this.state.text}
             />
             <button onClick={this.addHandler} > add </button>
+            <button onClick={this.removeHandler} > remove all </button>
           </form>
           <ItemsList items={this.state.items} updater={this.ListEditorUpdater}/>
         </div>
@@ -36,7 +38,7 @@ class ListEditorCompontent extends Component {
     this.setState({text: event.target.value})
   }
   addHandler(event){
-    event.preventDefault();
+    event.preventDefault()
     if (!this.state.text.length) {
       return
     }
@@ -48,23 +50,38 @@ class ListEditorCompontent extends Component {
       text: ""
     }))
   }
-  ListEditorUpdater(nexItemsValue){
-    this.setState({items: nexItemsValue})
+  removeHandler(event){
+    event.preventDefault()
+    this.setState({items: []})
+  }
+  ListEditorUpdater(newItemsString){
+    this.setState({items: newItemsString})
   }
 }
 
 class ItemsList extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      items: []
+    }
     this.removeItem = this.removeItem.bind(this)
+  }
+  static getDerivedStateFromProps(prevProps, prevState){
+    if(prevProps.items.length === prevState.items.length){
+      return prevState
+    }
+    return {
+      items: prevProps.items
+    }
   }
   render() {
     return(
       <ul>
-        {this.props.items.map((oneOfitem, index) => (
+        {this.props.items.map((oneOfitem,index) => (
           <li 
-            data-number={index} 
-            key={index}
+            data-number={index}
+            key={oneOfitem.text+index}
           >
             <span><b>{oneOfitem.text} </b></span>
             <button onClick={this.removeItem}> remove</button>
@@ -74,13 +91,12 @@ class ItemsList extends Component {
     )
   }
   removeItem(event){
-    let domEl = event.target.parentElement
-    let indexOfdomEl = domEl.getAttribute("data-number")
-    domEl.remove()
-    let newITemList = this.props.items.splice(indexOfdomEl, 1)
-    console.log(this.props.items)
-    console.log(newITemList)
-    this.props.updater(this.props.items)
+    event.preventDefault()
+    let indexOfdomEl = event.target.parentElement.getAttribute("data-number")
+    let newItemlist = this.state.items
+    newItemlist.splice(indexOfdomEl, 1)
+    this.setState({items: newItemlist})
+    this.props.updater(newItemlist)
   }
 }
 
