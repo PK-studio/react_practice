@@ -22,13 +22,6 @@
   font-size: large;
 }
 
-.component-description{
-  background-color: #eaeaea;
-  width: 100%;
-  height: auto;
-  text-align: center;
-}
-
 .DateComponent{
   width: 100%;
   height: auto;
@@ -36,4 +29,43 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.component-description{
+  background-color: #eaeaea;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 0;
+}
+.markdown{
+  background: #F8F3EE;
+}
+
+.markdownBox_demo{
+  text-align: center;
+  width: 300px;
+  padding-left: 50%;
+  margin-left: -150px;
+}
+
+.markdownBox{
+  border-top: 2px solid #D0D0D0;
+  min-height: 200px;
+  display: flex;
+}
+
+.markdownBox_right{
+  width: 50%;
+  height: auto;
+}
+
+.markdownBox_textarea{
+  width: 100%;
+  height: 200px;
+}
+
+.markdownBox_left{
+  width: 50%;
+  height: auto;
 }
